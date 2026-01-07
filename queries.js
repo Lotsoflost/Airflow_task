@@ -1,4 +1,5 @@
-db.airflow_data_new.aggregate([
+// Task 1: Top 5 frequently occurring comments
+db.airflow_data.aggregate([
   {
     $match: {
       content: { $type: "string", $ne: "" }
@@ -19,12 +20,11 @@ db.airflow_data_new.aggregate([
       cnt: 1
     }
   }
-]
-)
+]);
 
-;
 
-db.airflow_data_new.aggregate([
+// Task 2: All entries where the "content" field is less than 5 characters long
+db.airflow_data.aggregate([
   {
     $match: {
       content: { $type: "string" }
@@ -49,12 +49,11 @@ db.airflow_data_new.aggregate([
       len: { $strLenCP: { $trim: { input: "$content" } } }
     }
   }
-]
-)
+]);
 
-;
 
-db.airflow_data_new.aggregate([
+// Task 3: Average rating per day (result returned as timestamp / Date)
+db.airflow_data.aggregate([
   {
     $addFields: {
       at_dt: {
@@ -79,7 +78,7 @@ db.airflow_data_new.aggregate([
   },
   {
     $group: {
-      _id: "$day",        // <-- это Date (timestamp), как ты и просишь
+      _id: "$day",
       avgScore: { $avg: "$score" },
       cnt: { $sum: 1 }
     }
@@ -93,4 +92,4 @@ db.airflow_data_new.aggregate([
       cnt: 1
     }
   }
-])
+]);
