@@ -1,1 +1,16 @@
+.git
+.DS_Store
+airflow_settings.yaml
+__pycache__/
+astro
 .venv
+airflow-webserver.pid
+webserver_config.py
+airflow.cfg
+airflow.db
+include/trees.db
+include/garden_descriptions/
+include/data/locations.json
+.env
+upgrade-test*
+.idea/
